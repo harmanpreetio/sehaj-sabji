@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login to sabji manager</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #FFE6A7;
+    }
+    input {
+      display: block;
+      width: 100%;
+      padding: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+    .container {
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 30vh;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form accept="/add-sabji" method="post">
+      <h3 style="text-align: center;">Add Sabji</h3>
+      <input name="name" type="text" placeholder="Enter Name">
+      <input name="qty" type="text" placeholder="Enter Quantity">
+      <input type="submit">
+    </form>
+  </div>
+</body>
+</html>

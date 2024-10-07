@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sabji manager Dashboard</title>
+  <style>
+    body {
+      margin: 0px;
+      background-color:#FFE6A7;
+    }
+    .navbar-bg {
+      background-color: #99582A;
+    }
+    .navbar-links {
+      display: inline-block;
+      color: white;
+      padding: 10px;
+      transition: all 0.5s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .navbar-links:hover {
+      background-color: white;
+      color: rgb(21, 4, 78);
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar-bg">
+    <a href="/" class="navbar-links">Home</a>
+    <a href="/login" class="navbar-links">Login</a>
+    <a href="/dashboard" class="navbar-links">Dashboard</a>
+  </div>
+  <div>
+    <ul>
+      {% for i in sabji_list %}
+        <li>{{ i['name'] }} - {{ i['qty'] }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div>
+    <a href="/add-sabji">Add new Sabji</a>
+  </div>
+</body>
+</html>
