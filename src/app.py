@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from src.models.db import db
-from src.models import Sabji
+from src.models import Sabji, User
+from sqlalchemy import select
 
 app = Flask(__name__)
 
@@ -24,11 +25,8 @@ def index():
 def dashboard():
     # TODO: fetch sabji list from database
     # convert to list
-    sabji_list = [
-        {"name": "Allo", "qty": "1kg"},
-        {"name": "Pyaaz", "qty": "2kg"},
-        {"name": "Tamatar", "qty": "1kg"},
-    ]
+    stmt = select(Sabji)
+    sabji_list = db.session.scalars(stmt).all()
     return render_template("dashboard.html", sabji_list=sabji_list)
 
 @app.route("/add-sabji", methods=["GET", "POST"])
@@ -41,3 +39,24 @@ def add_sabji():
         db.session.commit()
         return redirect("/dashboard")
     return render_template("add_sabji.html")
+
+@app.route("/delete-sabji/<id>", methods=["GET"])
+def delete_sabji(id):
+    stmt = select(Sabji).where(Sabji.id == id)
+    sabji = db.session.scalars(stmt).first()
+    if sabji is not None:
+        db.session.delete(sabji)
+        db.session.commit()
+    return redirect("/dashboard")
+
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        user = User()
+        user.email = request.form["email"]
+        user.passwd = request.form['passwd']
+        db.session.add(user)
+        db.session.commit()
+        return redirect("/login")
+    return render_template("signup.html")
