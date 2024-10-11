@@ -31,8 +31,12 @@
     <a href="/" class="navbar-links">Home</a>
     <a href="/login" class="navbar-links">Login</a>
     <a href="/dashboard" class="navbar-links">Dashboard</a>
+    <a href="/logout" class="navbar-links">Logout</a>
   </div>
   <div>
+    {% if current_user.is_authenticated %}
+      <h1>Welcome {{ current_user.email }}!</h1>
+    {% endif %}
     <ul>
       {% for i in sabji_list %}
         <li>{{ i.name }} - {{ i.qty }} - <a href="/delete-sabji/{{ i.id }}">delete</a></li>
